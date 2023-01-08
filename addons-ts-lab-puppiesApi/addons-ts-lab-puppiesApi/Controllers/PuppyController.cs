@@ -55,7 +55,7 @@ namespace addons_ts_lab_puppiesApi.Controllers
         }
    
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdatePuppy([FromRoute] Guid id, UpdatePuppyRequestDto updatePuppyRequestDto)
+        public async Task<IActionResult> UpdatePuppy([FromRoute] Guid id, [FromBody] UpdatePuppyRequestDto updatePuppyRequestDto)
         {
             try
             {
