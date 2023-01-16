@@ -23,7 +23,7 @@ namespace addons_ts_lab_puppiesApi.Controllers
             }
             catch (Exception e)
             {
-                throw new Exception(e.Message);
+               throw new Exception(e.Message);
             }
         }
       
@@ -36,6 +36,8 @@ namespace addons_ts_lab_puppiesApi.Controllers
             }
             catch (Exception e)
             {
+                if (e.Message.Contains("No Record Found"))
+                  return NotFound();       
                 throw new Exception(e.Message);
             }
         }
@@ -64,6 +66,8 @@ namespace addons_ts_lab_puppiesApi.Controllers
             }
             catch (Exception e)
             {
+                if (e.Message.Contains("No Record Found"))
+                    return NotFound();
                 throw new Exception(e.Message);
             }
         }
@@ -78,7 +82,10 @@ namespace addons_ts_lab_puppiesApi.Controllers
             }
             catch (Exception e)
             {
-                throw new Exception(e.Message);
+               if (e.Message.Contains("No Record Found"))
+                    return NotFound();     
+                
+               throw new Exception(e.Message);
             }
         }
     }

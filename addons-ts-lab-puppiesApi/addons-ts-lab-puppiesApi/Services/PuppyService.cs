@@ -41,7 +41,7 @@ namespace addons_ts_lab_puppiesApi.Services
             var puppy = await _dbContext.Puppies.FindAsync(id);
             if (puppy==null)
             {
-                throw new Exception("Not Found");
+                throw new Exception("No Record Found");
             }
             puppy.Name = updatePuppyRequestDto.Name;
             puppy.Breed = updatePuppyRequestDto.Breed;
