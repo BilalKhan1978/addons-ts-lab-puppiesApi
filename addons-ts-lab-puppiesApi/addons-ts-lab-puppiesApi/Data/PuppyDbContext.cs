@@ -9,6 +9,12 @@ namespace addons_ts_lab_puppiesApi.Data
         {
         }
 
+        // This is fuzzy search using SOUNDEX built in function
+        [DbFunction(name: "SOUNDEX", IsBuiltIn = true)]
+        public string FuzzySearch(string query)
+        {
+            throw new Exception();
+        }
         public DbSet<Puppy> Puppies { get; set; } 
     }
 }

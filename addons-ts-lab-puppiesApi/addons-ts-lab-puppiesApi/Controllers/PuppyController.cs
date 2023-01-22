@@ -1,7 +1,6 @@
 ﻿using addons_ts_lab_puppiesApi.Services;
 using addons_ts_lab_puppiesApi.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Identity.Client;
 
 namespace addons_ts_lab_puppiesApi.Controllers
 {
@@ -14,6 +13,7 @@ namespace addons_ts_lab_puppiesApi.Controllers
         {
             _puppyService = puppyService;
         }
+        
         [HttpGet]
         public async Task<IActionResult> GetAllPuppies()
         {
@@ -26,7 +26,7 @@ namespace addons_ts_lab_puppiesApi.Controllers
                throw new Exception(e.Message);
             }
         }
-      
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetOnePuppy([FromRoute] Guid id)
         {
@@ -86,6 +86,32 @@ namespace addons_ts_lab_puppiesApi.Controllers
                     return NotFound();     
                 
                throw new Exception(e.Message);
+            }
+        }
+
+        [HttpGet("Fuzzyearch/{BreedName}")]
+        public async Task<IActionResult> SearchPuppyLike(string BreedName)
+        {
+            try
+            {
+                return Ok(await _puppyService.FindPuppies(BreedName));
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        [HttpGet("search/{query}")]
+        public async Task<IActionResult> SearchPuppy([FromRoute] string query)
+        {
+            try
+            {
+                return Ok(await _puppyService.SearchPuppies(query));
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
             }
         }
     }

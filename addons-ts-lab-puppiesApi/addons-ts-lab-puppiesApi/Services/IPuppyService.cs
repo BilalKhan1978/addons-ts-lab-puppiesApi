@@ -10,5 +10,7 @@ namespace addons_ts_lab_puppiesApi.Services
       Task<Puppy> AddPuppy(AddPuppyRequestDto addPuppyRequestDto);
       Task UpdatePuppy(Guid id,UpdatePuppyRequestDto updatePuppyRequestDto);
       Task DeletePuppyById(Guid id);
+      Task<List<Puppy>> FindPuppies(string Breed);
+      Task<List<Puppy>> SearchPuppies(string searchCriteria);
     }
 }

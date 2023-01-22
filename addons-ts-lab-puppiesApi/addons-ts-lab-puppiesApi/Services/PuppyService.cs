@@ -56,5 +56,26 @@ namespace addons_ts_lab_puppiesApi.Services
               _dbContext.Remove(puppy);
             await _dbContext.SaveChangesAsync();
         }
+        public async Task<List<Puppy>> FindPuppies(string Breed)
+        {
+            return await _dbContext.Puppies
+                .Where(
+                x => _dbContext.FuzzySearch(x.Breed) == _dbContext.FuzzySearch(Breed))
+                .ToListAsync();
+        }
+        public async Task<List<Puppy>> SearchPuppies(string searchCriteria)
+        {
+            var trimmedQuery = "%" + searchCriteria + "%";
+            var query = _dbContext.Puppies
+                            .Where(x =>
+                                    EF.Functions.Like(x.Name, trimmedQuery) ||
+                                    EF.Functions.Like(x.Breed, trimmedQuery))
+
+                            .OrderBy(x => x.Name);
+
+            var puppyList = await query
+                               .ToListAsync();
+            return puppyList;
+        }
     }
 }
